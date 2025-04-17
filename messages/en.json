@@ -1,0 +1,8 @@
+{
+  "common": {},
+  "SigninFormValidations": {
+    "invalidEmail": "Invalid email",
+    "requiredEmail": "Email is required",
+    "requiredPassword": "Password is required"
+  }
+}

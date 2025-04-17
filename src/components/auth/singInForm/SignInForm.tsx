@@ -1,41 +1,33 @@
 "use client";
-import Cookies from "js-cookie";
 
 import React from "react";
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  Container,
-  Paper,
-} from "@mui/material";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
-
-const validationSchema = Yup.object({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().required("Password is required"),
-});
+import { useFormik } from "formik";
+import { Button, TextField, Typography, Container, Paper } from "@mui/material";
+import getLoginValidationSchema from "@/validations/signInValidationSchema";
+import { useDispatch } from "react-redux";
+import { loginThunk } from "@/redux/thunk/authThunk";
 
 const SigninForm = () => {
-  const initialValues = {
-    email: "",
-    password: "",
-  };
+  const dispatch = useDispatch();
 
-  const handleSubmit = async (values: typeof initialValues) => {
-    Cookies.set("authToken", "testToken", { expires: 7 });
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: getLoginValidationSchema(),
+    onSubmit: async (values) => {
+      console.log("Submitted", values);
 
-    // try {
-    //   const response = await axios.post("/api/signin", values);
-    //   console.log("Logged in:", response.data);
-    //   // Handle success (e.g., set token, navigate)
-    // } catch (error) {
-    //   console.error("Signin error:", error);
-    // }
-  };
+      const dataToSend = {
+        email: values.email,
+        password: values.password,
+      };
+      dispatch(loginThunk(dataToSend as any) as any);
+
+      // Handle sign-in logic here
+    },
+  });
 
   return (
     <Container maxWidth="sm">
@@ -43,64 +35,50 @@ const SigninForm = () => {
         <Typography variant="h4" mb={3} align="center" color="#2ebcaa">
           Sign In
         </Typography>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            isSubmitting,
-          }) => (
-            <Form>
-              <TextField
-                name="email"
-                label="Email"
-                type="email"
-                fullWidth
-                margin="normal"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.email && Boolean(errors.email)}
-                helperText={touched.email && errors.email}
-              />
 
-              <TextField
-                name="password"
-                label="Password"
-                type="password"
-                fullWidth
-                margin="normal"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.password && Boolean(errors.password)}
-                helperText={touched.password && errors.password}
-              />
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            name="email"
+            label="Email"
+            type="email"
+            fullWidth
+            margin="normal"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
 
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{
-                  mt: 3,
-                  backgroundColor: "#2ebcaa",
-                  "&:hover": {
-                    backgroundColor: "#27a699",
-                  },
-                }}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Signing In..." : "Sign In"}
-              </Button>
-            </Form>
-          )}
-        </Formik>
+          <TextField
+            name="password"
+            label="Password"
+            type="password"
+            fullWidth
+            margin="normal"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              mt: 3,
+              backgroundColor: "#2ebcaa",
+              "&:hover": {
+                backgroundColor: "#27a699",
+              },
+            }}
+            disabled={formik.isSubmitting}
+          >
+            {formik.isSubmitting ? "Signing In..." : "Sign In"}
+          </Button>
+        </form>
       </Paper>
     </Container>
   );

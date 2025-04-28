@@ -1,0 +1,71 @@
+@import "../../../styles/variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: white;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    object-fit: contain;
+  }
+}
+
+.logoText {
+  font-weight: bold;
+  color: $primary;
+}
+
+.navSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.buySellButton {
+  color: $primary;
+  border-color: $primary;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-transform: none;
+}
+
+.navLink {
+  color: black;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.signInButton {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 8px;
+  text-transform: none;
+  padding: 6px 18px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #388e3c;
+  }
+}
+
+.registerButton {
+  background-color: $secondary !important;
+  color: $primary;
+  border-radius: 8px;
+  text-transform: none;
+  padding: 6px 18px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #a1f4a6;
+  }
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "./context/ThemeContext";
 import ReduxProviderLayout from "@/redux/ReduxProvider";
 import "../styles/global.scss";
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReduxProviderLayout>{children}</ReduxProviderLayout>
+        <ThemeProvider>
+          <ReduxProviderLayout>{children}</ReduxProviderLayout>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,4 +1,6 @@
 @import "./fonts";
+@import "./themes/themes";
+@import "./variables";
 
 * {
   margin: 0;
@@ -8,4 +10,7 @@
 
 body {
   font-family: "Pompiere", sans-serif !important;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }

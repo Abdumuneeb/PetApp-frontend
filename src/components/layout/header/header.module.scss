@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px;
-  background-color: white;
+  background-color: var(--header-bg);
 }
 
 .logoSection {
@@ -30,7 +30,7 @@
 }
 
 .buySellButton {
-  color: $primary;
+  color: var(--text-color);
   border-color: $primary;
   font-weight: bold;
   padding: 6px 14px;
@@ -39,14 +39,14 @@
 }
 
 .navLink {
-  color: black;
+  color: var(--text-color);
   font-weight: 500;
   font-size: 14px;
 }
 
 .signInButton {
   background-color: #4caf50;
-  color: white;
+  color: var(--text-color);
   border-radius: 8px;
   text-transform: none;
   padding: 6px 18px;

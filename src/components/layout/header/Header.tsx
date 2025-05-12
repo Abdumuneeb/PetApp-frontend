@@ -3,6 +3,7 @@
 import { Box, Button, Typography, Link } from "@mui/material";
 import Image from "next/image";
 import styles from "./header.module.scss";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 
 export default function Header() {
   return (
@@ -35,6 +36,8 @@ export default function Header() {
         <Button variant="contained" className={styles.registerButton}>
           REGISTER
         </Button>
+
+        <ThemeToggle />
       </Box>
     </header>
   );
